@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 import { useState, useEffect } from "react";
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -33,7 +32,7 @@ const ShowAll = () => {
             })
             .then((data) => setChaines(data))
             .catch((error) => console.error('Erreur lors du chargement des chaines:', error));
-    }, []);
+    }, [apiUrl]);
 
     const [isOpen, setIsOpen] = useState(false);
 

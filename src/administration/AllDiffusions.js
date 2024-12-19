@@ -33,7 +33,7 @@ const AllDiffusions = () => {
             })
             .then((data) => setDiffusions(data))
             .catch((error) => setError(error.message));
-    }, []);
+    }, [apiUrl,token]);
 
     // Fonction pour supprimer une animation
     const handleDelete = (id) => {

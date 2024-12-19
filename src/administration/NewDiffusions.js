@@ -31,7 +31,7 @@ const NewDiffusions = () => {
             .then((response) => response.json())
             .then((data) => setChaines(data))
             .catch((error) => console.error('Erreur lors du chargement des chaînes:', error));
-    }, []);
+    }, [apiUrl,token]);
 
     // Gestion de l'envoi du formulaire
     const handleSubmit = (e) => {

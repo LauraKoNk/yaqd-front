@@ -33,7 +33,7 @@ const AllAnimation = () => {
             })
             .then((data) => setAnimations(data))
             .catch((error) => setError(error.message));
-    }, [token] // Ici, ajout de 'token' dans les dépendances pour s'assurer qu'il est toujours à jour. Pour que useEffect soit réexécuté à chaque fois que le token change, il faut l’ajouter à la liste des dépendances :
+    }, [apiUrl,token] // Ici, ajout de 'token' dans les dépendances pour s'assurer qu'il est toujours à jour. Pour que useEffect soit réexécuté à chaque fois que le token change, il faut l’ajouter à la liste des dépendances :
     );
 
     // Fonction pour supprimer une animation

@@ -40,7 +40,7 @@ const EditAnimation = () => {
             .then((res) => res.json())
             .then((data) => setFormData(data))
             .catch((error) => console.error("Erreur :", error));
-    }, [id]);
+    }, [apiUrl,token,id]);
 
     // Gestion des champs simples
     const handleChange = (e) => {

@@ -33,7 +33,7 @@ const AllChaines = () => {
             })
             .then((data) => setChaines(data))
             .catch((error) => setError(error.message));
-    }, [token]);
+    }, [apiUrl,token]);
 
     // Fonction pour supprimer une animation
     const handleDelete = (id) => {
