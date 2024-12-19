@@ -3,8 +3,9 @@ const Contact = () => {
         <>
             <div class="max-w-lg mx-auto p-6 border-2 border-gray-300/50 rounded-lg shadow-md">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Contactez-nous</h2>
-                <form action="#" method="POST" class="space-y-6">
+                <form method="POST" class="space-y-6" data-netlify="true" onSubmit="submit">
                     <div>
+                    <input type="hidden" name="form-name" value="contact" />
                         <label for="name" class="block text-sm font-medium text-gray-700">Je m'appelle</label>
                         <input
                             type="text"
