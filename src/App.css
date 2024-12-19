@@ -1,38 +1,24 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap');
+@font-face {
+  font-family: 'Wallop-semibold';
+  src: url('/public/fonts/WallopTRIAL-SemiBold-BF6719a5ce31f32.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: 'Wallop-medium';
+  src: url('/public/fonts/WallopTRIAL-Medium-BF6719a5cdef709.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@layer utilities {
+  .text-outline {
+    color: white;
+    -webkit-text-stroke: 1.1px black;
+    text-stroke: 1.1px black; /* Compatibilité */
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
