@@ -1,48 +1,112 @@
 
 const CardModal = ({ setShow, diffusion }) => {
+
     return (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-            <div className="bg-white max-w-lg p-12 border-2 border-gray-300/50 rounded-lg shadow-md flex 
-                flex-col items-start">
+            <div
+                className="bg-white max-w-lg w-full max-h-[80vh] overflow-y-auto p-6 border-2 border-gray-300/50 
+            rounded-lg shadow-md flex flex-col"
+            >
+                {/* Bouton de fermeture */}
                 <button
+                    type="button"
+                    className="text-black bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 p-2 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                     onClick={(e) => {
                         setShow(false);
                         e.stopPropagation();
                     }}
-                    className="ml-auto p-2"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                        <path d="M18.36 5.64L12 12l6.36 6.36a1 1 0 0 0 0-1.42L13.42 12l5.94-5.94a1 1 0 0 0-1.42-1.42zM5.64 5.64a1 1 0 0 0-1.42 1.42L10.58 12l-6.36 6.36a1 1 0 1 0 1.42 1.42L12 13.42l6.36 6.36a1 1 0 0 0 1.42-1.42L13.42 12l5.94-5.94a1 1 0 0 0-1.42-1.42L12 10.58z" />
+                    <svg
+                        className="w-3 h-3"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 14 14"
+                    >
+                        <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                        />
                     </svg>
+                    <span className="sr-only">Close modal</span>
                 </button>
-                <div className="grid grid-cols-2 items-center gap-4">
-                    <img className="object-cover w-32 h-32 rounded-full shadow-md" src={diffusion.image} alt="image" />
-                    <h1 className="text-2xl font-wallop-semibold">{diffusion.titre}</h1>
+
+                {/* Bloc image et titre */}
+                <div className="flex justify-evenly items-center mb-6">
+                    <img
+                        className="object-cover w-40 h-40 rounded-full shadow-md mb-4"
+                        src={diffusion.image}
+                        alt="image"
+                    />
+                    <h1
+                        className="text-3xl font-wallop-semibold text-center break-words"
+                    >
+                        {diffusion.titre}
+                    </h1>
                 </div>
-                <div className="">
-                    <p className="font-wallop-semibold">Chaînes :</p>
-                    <p className="font-wallop-medium">{diffusion.chaines.join(', ')}</p>
 
-                    <p className="font-wallop-semibold">Année :</p>
-                    <p className="font-wallop-medium">{diffusion.annee_premiere_diffusion}</p>
 
-                    <p className="font-wallop-semibold">Studio :</p>
-                    <p className="font-wallop-medium">{diffusion.studio}</p>
+                {/* Informations détaillées */}
+                <div className="w-full text-left space-y-3">
+                    <div className="flex">
+                        {diffusion.genre.map((genre, index) => {
+                            const colorClasses = {
+                                "Action": "bg-red-200 text-red-700",
+                                "Amitié": "bg-purple-200 text-purple-700",
+                                "Aventure": "bg-green-200 text-green-700",
+                                "Science-fiction": "bg-indigo-200 text-indigo-700",
+                            };
+                            const genreClass = colorClasses[genre] || "bg-orange-200 text-orange-700";
 
-                    <p className="font-wallop-semibold">Pays :</p>
-                    <p className="font-wallop-medium">{diffusion.pays.join(', ')}</p>
-
-                    <p className="font-wallop-semibold">Genre :</p>
-                    <p className="font-wallop-medium">{diffusion.genre.join(', ')}</p>
-
-                    <p className="font-wallop-semibold">Format :</p>
-                    <p className="font-wallop-medium">{diffusion.format}</p>
-
-                    <p className="font-wallop-semibold">Synopsis :</p>
-                    <p className="font-wallop-medium">{diffusion.synopsis}</p>
-
-                    <p className="font-wallop-semibold">Où voir :</p>
-                    <p className="font-wallop-medium">{diffusion.lien}</p>
+                            return (
+                                <span
+                                    key={index}
+                                    className={`px-4 py-1 mx-1 rounded-full ${genreClass} text-sm font-wallop-medium`}
+                                >
+                                    {genre}
+                                </span>
+                            );
+                        })}
+                    </div>
+                    <div className="flex">
+                        <p className="font-wallop-medium text-lg">
+                            <span className="font-wallop-semibold text-lg mr-2">Année :</span>
+                            {diffusion.annee_premiere_diffusion}
+                        </p>
+                    </div>
+                    <div className="flex">
+                        <p className="font-wallop-medium text-lg">
+                            <span className="font-wallop-semibold text-lg mr-2">Chaîne(s) :</span>
+                            {diffusion.chaines.join(', ')}
+                        </p>
+                    </div>
+                    <div className="flex">
+                        <p className="font-wallop-medium text-lg">
+                            <span className="font-wallop-semibold text-lg mr-2">Format :</span>
+                            {diffusion.format}
+                        </p>
+                    </div>
+                     <div className="flex">
+                        <p className="font-wallop-medium text-lg">
+                            <span className="font-wallop-semibold text-lg mr-2">Pays :</span>
+                            {diffusion.pays.join(', ')}
+                        </p>
+                    </div>
+                    <div className="flex">
+                        <p className="font-wallop-medium text-lg">
+                            <span className="font-wallop-semibold text-lg mr-2">Studio :</span>
+                            {diffusion.studio}
+                        </p>
+                    </div>
+                    <div className="flex">
+                        <p className="font-wallop-medium text-lg">
+                            <span className="font-wallop-semibold text-lg mr-2">Synopsis :</span>
+                            {diffusion.synopsis}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

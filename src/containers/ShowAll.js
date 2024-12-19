@@ -57,21 +57,39 @@ const ShowAll = () => {
         <main className="mx-10">
             {/* Phrase YAQD */}
             <div className="text-center mt-28">
-                <p className="font-spicyRice text-5xl text-white text-outline">Y'avait quoi déjà
-                {
-                selectedChaine ? <span className={
-                    selectedChaine === "Gulli"
-                        ? "text-#41f04b"
-                        : selectedChaine === "Tf1"
-                        ? "text-red-500"
-                        : "text-gray-500"
-                }> sur {selectedChaine}</span> : <span className="bg-gradient-to-r from-fuchsia-500 via-yellow-400
-            to-cyan-500
-            text-transparent bg-clip-text"> à la télé</span>
-                }
-                    
-                    ?</p>
+                <p className="font-spicyRice text-6xl text-white">
+                    <span className="text-outline mx-2">
+                        Y'avait quoi déjà
+                    </span>
+                    {
+                        selectedChaine ? (
+                            <span className={
+                                (selectedChaine === "Gulli" || selectedChaine === "France 5" || selectedChaine === "Piwi")
+                                    ? "text-green-500"
+                                    : (selectedChaine === "Tf1" || selectedChaine === "M6" || selectedChaine === "Jetix")
+                                        ? "text-red-500"
+                                        : selectedChaine === "France 4"
+                                            ? "text-purple-500"
+                                        : (selectedChaine === "France 3" || selectedChaine === "Tiji") ?
+                                            "text-blue-400"
+                                        : (selectedChaine === "CanalJ" || selectedChaine === "Teletoon+") ?
+                                        "text-orange-400"
+                                            : "text-gray-500"
+                            }>
+                                {" "}sur {selectedChaine}
+                            </span>
+                        ) : (
+                            <span className="bg-gradient-to-r from-fuchsia-500 via-yellow-400
+                    to-cyan-500 text-transparent bg-clip-text mx-2">
+                               {" "} à la télé
+                            </span>
+                        )
+                    }
+                    <span className="text-outline mx-2">?</span>
+                </p>
             </div>
+
+
             {/* Filtrage + barre de recherche */}
             <div>
                 <div className="flex gap-5 mt-10">
@@ -120,7 +138,7 @@ const ShowAll = () => {
                 </div>
             </div>
             {/* Bulles animations  */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center mt-32">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center my-28">
                 {(selectedChaine
                     ? filteredDiffusions // Si une chaîne est sélectionnée, affiche les diffusions filtrées
                     : diffusions // Sinon, affiche toutes les diffusions
