@@ -58,6 +58,8 @@ const CardModal = ({ setShow, diffusion }) => {
                                 "Amitié": "bg-purple-200 text-purple-700",
                                 "Aventure": "bg-green-200 text-green-700",
                                 "Science-fiction": "bg-indigo-200 text-indigo-700",
+                                "Fantaisie": "bg-pink-200 text-pink-700",
+                                "Comédie": "bg-yellow-200 text-yellow-800"
                             };
                             const genreClass = colorClasses[genre] || "bg-orange-200 text-orange-700";
 

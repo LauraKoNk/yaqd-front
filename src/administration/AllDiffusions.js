@@ -82,8 +82,10 @@ const AllDiffusions = () => {
                     <table className="min-w-full table-auto border-collapse border border-gray-300 shadow-md">
                         <thead className="bg-gray-200">
                             <tr>
-                                <th className="border border-gray-300 px-4 py-2 text-left">Id de l'animation</th>
+                            <th className="border border-gray-300 px-4 py-2 text-left">Id de l'animation</th>
+                                <th className="border border-gray-300 px-4 py-2 text-left">Titre de l'animation</th>
                                 <th className="border border-gray-300 px-4 py-2 text-left">Id de la chaine</th>
+                                <th className="border border-gray-300 px-4 py-2 text-left">Nom de la chaine</th>
                                 <th className="border border-gray-300 px-4 py-2 text-left">Supprimer</th>
                             </tr>
                         </thead>
@@ -91,9 +93,13 @@ const AllDiffusions = () => {
                             {diffusions.length > 0 ? (
                                 diffusions.map((diffusion) => (
                                     <tr key={diffusion._id} className="hover:bg-gray-100">
-                                        <td className="border border-gray-300 px-4 py-2">{diffusion.animationId}</td>
+                                        <td className="border border-gray-300 px-4 py-2">{diffusion.animationId._id}</td>
+                                        <td className="border border-gray-300 px-4 py-2">{diffusion.animationId.titre}</td>
                                         <td className="border border-gray-300 px-4 py-2">
-                                            {diffusion.chaineId}
+                                            {diffusion.chaineId._id}
+                                        </td>
+                                        <td className="border border-gray-300 px-4 py-2">
+                                            {diffusion.chaineId.nom}
                                         </td>
                                         <td className="border border-gray-300 px-4 py-2">
                                             <button

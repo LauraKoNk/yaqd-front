@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 import { useState, useEffect } from "react";
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -72,7 +71,7 @@ const ShowAll = () => {
                                             ? "text-purple-500"
                                         : (selectedChaine === "France 3" || selectedChaine === "Tiji") ?
                                             "text-blue-400"
-                                        : (selectedChaine === "CanalJ" || selectedChaine === "Teletoon+") ?
+                                        : (selectedChaine === "Canal J" || selectedChaine === "Teletoon+") ?
                                         "text-orange-400"
                                             : "text-gray-500"
                             }>
