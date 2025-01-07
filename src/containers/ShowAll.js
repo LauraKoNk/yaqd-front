@@ -81,7 +81,7 @@ const ShowAll = () => {
                                         "text-orange-400"
                                             : "text-gray-500"
                             }>
-                                {" "}sur {selectedChaine}
+                                {" "}sur {selectedChaine} {" "}
                             </span>
                         ) : (
                             <span className="bg-gradient-to-r from-fuchsia-500 via-yellow-400
