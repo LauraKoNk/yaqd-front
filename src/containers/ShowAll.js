@@ -1,4 +1,5 @@
 import Card from "../components/Card";
+import SkeletonCard from "../components/SkeletonCard";
 import { useState, useEffect } from "react";
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -6,6 +7,7 @@ const ShowAll = () => {
     const [diffusions, setDiffusions] = useState([]);
     const [chaines, setChaines] = useState([]);
     const [selectedChaine, setSelectedChaine] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         // Récupération des diffusions
@@ -19,8 +21,12 @@ const ShowAll = () => {
             .then((data) => {
                 // console.log('Diffusions reçues:', data.diffusions);
                 setDiffusions(data.diffusions || []); // Met à jour l'état avec la propriété diffusions
+                setLoading(false);  // Désactive le chargement après réception des données
             })
-            .catch((error) => console.error('Erreur lors du chargement des diffusions:', error));
+            .catch((error) => {
+            console.error('Erreur lors du chargement des diffusions:', error)
+            setLoading(false);}
+            );
 
         // Récupération des chaines
         fetch(`${apiUrl}/api/chaine/filtre`)
@@ -57,7 +63,7 @@ const ShowAll = () => {
             {/* Phrase YAQD */}
             <div className="text-center mt-28">
                 <p className="font-spicyRice text-6xl text-white">
-                    <span className="text-outline mx-2">
+                    <span className="text-outline mx-1">
                         Y'avait quoi déjà
                     </span>
                     {
@@ -80,11 +86,11 @@ const ShowAll = () => {
                         ) : (
                             <span className="bg-gradient-to-r from-fuchsia-500 via-yellow-400
                     to-cyan-500 text-transparent bg-clip-text mx-2">
-                               {" "} à la télé
+                              à la télé
                             </span>
                         )
                     }
-                    <span className="text-outline mx-2">?</span>
+                    <span className="text-outline">?</span>
                 </p>
             </div>
 
@@ -138,12 +144,16 @@ const ShowAll = () => {
             </div>
             {/* Bulles animations  */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center my-28">
-                {(selectedChaine
+            {loading
+                    ? Array.from({ length: 4 }).map((_, index) => (
+                        <SkeletonCard key={index} /> 
+                    ))
+                    :(selectedChaine
                     ? filteredDiffusions // Si une chaîne est sélectionnée, affiche les diffusions filtrées
                     : diffusions // Sinon, affiche toutes les diffusions
                 ).map((diffusion) => (
                     <Card key={diffusion._id} diffusion={diffusion} />
-                ))}
+                )) }
             </div>
         </main>
     );
