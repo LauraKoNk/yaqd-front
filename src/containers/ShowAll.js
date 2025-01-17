@@ -66,6 +66,13 @@ const ShowAll = () => {
         setSearchTerm(term);
     };
 
+    const resetFilters = () => {
+        setSelectedChaine(null);
+        setSelectedGenre(null);
+        setSearchTerm("");
+    }
+
+
     const filteredAndSearchedDiffusions = diffusions.filter((diffusion) => {
         if (selectedChaine && selectedGenre) {
             return diffusion.chaines.includes(selectedChaine) && diffusion.genre.includes(selectedGenre);
@@ -82,6 +89,18 @@ const ShowAll = () => {
         return true;
     });
 
+    // Couleurs pour filtres genres affichés
+    const colorClasses = {
+        "Action": "bg-red-200 text-red-700",
+        "Amitié": "bg-purple-200 text-purple-700",
+        "Aventure": "bg-green-200 text-green-700",
+        "Comédie": "bg-yellow-200 text-yellow-800",
+        "Educatif": "bg-orange-200 text-orange-700",
+        "Fantastique": "bg-amber-600 text-amber-950",
+        "Fantaisie": "bg-pink-200 text-pink-700",
+        "Science-fiction": "bg-indigo-200 text-indigo-700"
+    };
+    const genreClass = colorClasses[selectedGenre]
 
     return (
         <main className="mx-10">
@@ -222,6 +241,107 @@ const ShowAll = () => {
                     <SearchBar
                         goSearch={handleSearch}
                     />
+                </div>
+                {/* Filtres affichés */}
+                <div className="flex items-center gap-5 mt-5">
+                    {(selectedChaine || selectedGenre || searchTerm) && (
+                        <div className="flex px-4 py-2 mx-1 gap-3 text-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" fill="currentColor">
+                                <path d="M10 18h4a1 1 0 0 0 0-2h-4a1 1 0 1 0 0 2zm-4-6h12a1 1 0 0 0 0-2H6a1 1 0 0 0 0 2zm16-7a1 1 0 0 0-1-1H3a1 1 0 1 0 0 2h18a1 1 0 0 0 1-1z" />
+                            </svg>
+                            Filtres :
+                        </div>
+                    )}
+                    {selectedChaine && (
+                            <div className="flex px-4 py-2 rounded-full border gap-3">
+                                <span className="font-wallop-medium"
+                                >
+                                    {selectedChaine}
+                                </span>
+                                <button onClick={() => {
+                                    setSelectedChaine(null);
+                                }}>
+                                    <svg
+                                        className="w-2 h-2"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 14 14"
+                                    >
+                                        <path
+                                            stroke="currentColor"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+
+                    )}
+                    {selectedGenre && (
+                            <div className={`flex px-4 py-2 mx-1 rounded-full border gap-3 ${genreClass}`}>
+                                <span className="font-wallop-medium"
+                                > 
+                                    {selectedGenre}
+                                </span>
+                                <button onClick={() => {
+                                    setSelectedGenre(null);
+                                }}>
+                                    <svg
+                                        className="w-2 h-2"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 14 14"
+                                    >
+                                        <path
+                                            stroke="currentColor"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+
+                    )}
+                    {searchTerm && (
+                        <div className="flex px-4 py-2 mx-1 rounded-full border gap-3">
+                            Ma recherche :
+                            <span className="mx-1 font-wallop-medium"
+                            >
+                                {searchTerm}
+                            </span>
+                            <button onClick={() => {
+                                setSearchTerm("");
+                            }}>
+                                <svg
+                                    className="w-2 h-2"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 14 14"
+                                >
+                                    <path
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    )
+                    }
+                    {(selectedChaine || selectedGenre || searchTerm) && (
+                        <button className="ml-auto mx-10 px-4 py-2 rounded-full border gap-3" onClick={resetFilters}>
+                            Supprimer les filtres
+                        </button>
+                    )}
                 </div>
             </div>
 
