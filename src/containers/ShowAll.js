@@ -1,5 +1,6 @@
 import Card from "../components/Card";
 import SkeletonCard from "../components/SkeletonCard";
+import SearchBar from "../components/SearchBar";
 import { useState, useEffect } from "react";
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -7,6 +8,10 @@ const ShowAll = () => {
     const [diffusions, setDiffusions] = useState([]);
     const [chaines, setChaines] = useState([]);
     const [selectedChaine, setSelectedChaine] = useState(null);
+    const [selectedGenre, setSelectedGenre] = useState(null);
+    const [isChainesOpen, setIsChainesOpen] = useState(false);
+    const [isGenresOpen, setIsGenresOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -24,8 +29,9 @@ const ShowAll = () => {
                 setLoading(false);  // Désactive le chargement après réception des données
             })
             .catch((error) => {
-            console.error('Erreur lors du chargement des diffusions:', error)
-            setLoading(false);}
+                console.error('Erreur lors du chargement des diffusions:', error)
+                setLoading(false);
+            }
             );
 
         // Récupération des chaines
@@ -40,22 +46,41 @@ const ShowAll = () => {
             .catch((error) => console.error('Erreur lors du chargement des chaines:', error));
     }, [apiUrl]);
 
-    const [isOpen, setIsOpen] = useState(false);
+    const toggleDropdownChaines = () => {
+        setIsChainesOpen(!isChainesOpen);
+    };
 
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
+    const toggleDropdownGenres = () => {
+        setIsGenresOpen(!isGenresOpen);
     };
 
     const handleClickedChannel = (clickedChannel) => {
-        setSelectedChaine(clickedChannel.nom); // Stocke l'id de la chaîne sélectionnée
-        console.log("id de la chaine selected :", clickedChannel._id);
+        setSelectedChaine(clickedChannel.nom);
     };
 
-    const filteredDiffusions = diffusions.filter((diffusion) =>
-        diffusion.chaines.includes(selectedChaine) // Vérifie si selectedChaine est présent dans chaines
-    );
+    const handleClickedGenre = (genre) => {
+        setSelectedGenre(genre);
+    };
 
-    console.log(diffusions);
+    const handleSearch = (term) => {
+        setSearchTerm(term);
+    };
+
+    const filteredAndSearchedDiffusions = diffusions.filter((diffusion) => {
+        if (selectedChaine && selectedGenre) {
+            return diffusion.chaines.includes(selectedChaine) && diffusion.genre.includes(selectedGenre);
+        } else if (selectedChaine) {
+            return diffusion.chaines.includes(selectedChaine);
+        } else if (selectedGenre) {
+            return diffusion.genre.includes(selectedGenre);
+        }
+        else if (searchTerm) {
+            return diffusion.titre.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+
+        // Si aucun filtre n'est défini, on retourne toutes les diffusions
+        return true;
+    });
 
 
     return (
@@ -75,18 +100,18 @@ const ShowAll = () => {
                                         ? "text-red-500"
                                         : selectedChaine === "France 4"
                                             ? "text-purple-500"
-                                        : (selectedChaine === "France 3" || selectedChaine === "Tiji") ?
-                                            "text-blue-400"
-                                        : (selectedChaine === "Canal J" || selectedChaine === "Teletoon+") ?
-                                        "text-orange-400"
-                                            : "text-gray-500"
+                                            : (selectedChaine === "France 3" || selectedChaine === "Tiji") ?
+                                                "text-blue-400"
+                                                : (selectedChaine === "Canal J" || selectedChaine === "Teletoon+") ?
+                                                    "text-orange-400"
+                                                    : "text-gray-500"
                             }>
                                 {" "}sur {selectedChaine} {" "}
                             </span>
                         ) : (
                             <span className="bg-gradient-to-r from-fuchsia-500 via-yellow-400
                     to-cyan-500 text-transparent bg-clip-text mx-2">
-                              à la télé
+                                à la télé
                             </span>
                         )
                     }
@@ -95,19 +120,19 @@ const ShowAll = () => {
             </div>
 
 
-            {/* Filtrage + barre de recherche */}
-            <div>
-                <div className="flex gap-5 mt-10">
-                    <h2 className="text-xl font-normal mb-4">Filtrer par :</h2>
+            {/* Menus déroulants + barre de recherche */}
+            <div className="container mt-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="relative">
+                        {/* Menu déroulant des chaines */}
                         <button
                             className="w-full text-gray-700 py-2 px-4 rounded border border-gray-200 focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
                             type="button"
-                            onClick={toggleDropdown}
+                            onClick={toggleDropdownChaines}
                         >
                             Chaines
                             <svg
-                                className={`w-4 h-4 ml-2 transform transition-transform ${isOpen ? "rotate-180" : "rotate-0"
+                                className={`w-4 h-4 ml-2 transform transition-transform ${isChainesOpen ? "rotate-180" : "rotate-0"
                                     }`}
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -123,9 +148,7 @@ const ShowAll = () => {
                                 />
                             </svg>
                         </button>
-
-                        {/* Menu déroulant */}
-                        {isOpen && (
+                        {isChainesOpen && (
                             <div className="absolute w-full mt-1 rounded bg-white shadow-lg dropdown-menu">
                                 <ul>
                                     {chaines.map((chaine) => (
@@ -140,20 +163,84 @@ const ShowAll = () => {
                             </div>
                         )}
                     </div>
+                    {/* Menu déroulant des genre */}
+                    <div className="relative">
+                        <button
+                            className="w-full text-gray-700 py-2 px-4 rounded border border-gray-200 focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
+                            type="button"
+                            onClick={toggleDropdownGenres}
+                        >
+                            Genres
+                            <svg
+                                className={`w-4 h-4 ml-2 transform transition-transform ${isGenresOpen ? "rotate-180" : "rotate-0"
+                                    }`}
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M19 9l-7 7-7-7"
+                                />
+                            </svg>
+                        </button>
+                        {isGenresOpen && (
+                            <div className="absolute w-full mt-1 rounded bg-white shadow-lg dropdown-menu">
+                                <ul>
+                                    <li
+                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        onClick={() => handleClickedGenre("Action")}>Action</li>
+                                    <li
+                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        onClick={() => handleClickedGenre("Amitié")}>Amitié</li>
+                                    <li
+                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        onClick={() => handleClickedGenre("Aventure")}>Aventure</li>
+                                    <li
+                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        onClick={() => handleClickedGenre("Comédie")}>Comédie</li>
+                                    <li
+                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        onClick={() => handleClickedGenre("Educatif")}>Educatif</li>
+                                    <li
+                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        onClick={() => handleClickedGenre("Fantaisie")}>Fantaisie</li>
+                                    <li
+                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        onClick={() => handleClickedGenre("Fantastique")}>Fantastique</li>
+                                    <li
+                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        onClick={() => handleClickedGenre("Science-fiction")}>Science-fiction</li>
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                    <SearchBar
+                        goSearch={handleSearch}
+                    />
                 </div>
             </div>
+
+
             {/* Bulles animations  */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center my-28">
-            {loading
+                {loading
                     ? Array.from({ length: 4 }).map((_, index) => (
-                        <SkeletonCard key={index} /> 
+                        <SkeletonCard key={index} />  // Affiche les skeleton cards
                     ))
-                    :(selectedChaine
-                    ? filteredDiffusions // Si une chaîne est sélectionnée, affiche les diffusions filtrées
-                    : diffusions // Sinon, affiche toutes les diffusions
-                ).map((diffusion) => (
-                    <Card key={diffusion._id} diffusion={diffusion} />
-                )) }
+                    : filteredAndSearchedDiffusions.length > 0 ? (filteredAndSearchedDiffusions.map((diffusion) => (
+                        <Card key={diffusion._id} diffusion={diffusion} />
+                    ))) : <div className="flex items-center justify-center col-span-full mb-7 gap-3">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
+                        </svg>
+                        <p className="text-xl font-semibold">Aucun résultat trouvé</p>
+                    </div>}
             </div>
         </main>
     );
