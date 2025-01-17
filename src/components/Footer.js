@@ -26,9 +26,9 @@ const Footer = () => {
     <>
       <div className="bg-black text-white p-16 flex justify-between font-wallop-semibold">
         <div className="leftSide">
-          <img src="/assets/YAQD-logo.png" alt="Logo" className="h-16" />
+          <img src="/assets/YAQD-logo.png" alt="Logo" className="h-16 pl-10" />
           <p className="pt-5 text-sm text-balance max-w-[250px]">
-            Tous les programmes jeunesses des années 2000 qui ont bercé ton enfance sont recensés ici.
+            Tous les programmes jeunesses des années 2000 et + qui ont bercé ton enfance sont recensés ici.
           </p>
         </div>
         <div className="flex gap-5">
