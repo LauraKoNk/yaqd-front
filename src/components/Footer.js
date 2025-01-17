@@ -32,8 +32,8 @@ const Footer = () => {
           </p>
         </div>
         <div className="flex gap-5">
-          <Link to="/voirtout">Voir tout </Link>
-          <Link to="/apropos">À propos </Link>
+          <Link to="/">Voir tout </Link>
+          <Link to="/mentions-legales">Mentions légales </Link>
           <Link to="/contact"> Contact</Link>
           {user && <Link to="/indexAdmin">Admin</Link>}
           {user ?

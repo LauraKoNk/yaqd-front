@@ -10,6 +10,7 @@ import CardModal from './components/CardModal';
 import Header from './components/Header';
 import About from './components/About';
 import Footer from './components/Footer';
+import LegalNotice from './components/LegalNotice';
 import Contact from './components/Contact';
 
 // admin CRUD
@@ -37,9 +38,10 @@ function App() {
     <main>
       <Routes>
         {/* Navigation du site */}
-        <Route path='/voirtout' element={<ShowAll />}/>
+        <Route path='/' element={<ShowAll />}/>
         <Route path="/card" element={<CardModal />} />
         <Route path='/apropos' element={<About />}/>
+        <Route path='/mentions-legales' element={<LegalNotice />}/>
         <Route path='/contact' element={ <Contact />} />
         {/* Administration */}
         <Route path='/indexAdmin' element={ <PrivateRoute> <IndexAdmin /> </PrivateRoute> } />

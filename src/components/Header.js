@@ -7,7 +7,7 @@ const Header = () => {
         <nav className="bg-white text-black font-wallop-semibold">
             <div class="md:flex justify-between p-7">
                 <div className="logo pl-9">
-                    <Link to="/voirtout">
+                    <Link to="/">
                       <img src="/assets/YAQD-logo.png" alt="Logo" class="h-20" />
                     </Link>
                 </div>
@@ -35,12 +35,9 @@ const Header = () => {
                     </svg>
                 </button>
 
-                <div id="navbar-Links" className="hidden md:flex items-center gap-5 px-3 text-xl">
-                    <Link to="/voirtout">
+                <div id="navbar-Links" className="hidden md:flex items-center gap-5 px-10 text-xl">
+                    <Link to="/">
                         Voir tout
-                    </Link>
-                    <Link to="/apropos">
-                    A propos
                     </Link>
                     <Link to='/contact'>
                     Contact
