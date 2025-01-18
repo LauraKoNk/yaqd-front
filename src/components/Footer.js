@@ -26,11 +26,11 @@ const Footer = () => {
     <>
       <div className="bg-black text-white space-y-5 md:space-y-0  p-16 md:flex md:justify-between font-wallop-semibold">
         <div className="md:hidden flex flex-col items-center space-y-7">
-        <img src="/assets/YAQD-logo.png" alt="Logo" className="md:hidden h-20"/>
-        <p className="md:hidden pt-5 text-sm"> Tous les programmes jeunesses des années 2000 et + qui ont bercé ton enfance sont recensés ici.</p>
+          <img src="/assets/YAQD-logo.png" alt="Logo" className="md:hidden h-20" />
+          <p className="md:hidden pl-4 pt-3 pb-8 text-sm text-balance max-w-[250px]"> Tous les programmes jeunesses des années 2000 et + qui ont bercé ton enfance sont recensés ici.</p>
         </div>
         <div className="leftSide">
-          <img src="/assets/YAQD-logo.png" alt="Logo" className="hidden md:block md:h-16 md:pl-10"/>
+          <img src="/assets/YAQD-logo.png" alt="Logo" className="hidden md:block md:h-16 md:pl-10" />
           <p className="hidden md:block pt-5 text-sm text-balance md:max-w-[250px]">
             Tous les programmes jeunesses des années 2000 et + qui ont bercé ton enfance sont recensés ici.
           </p>
@@ -39,7 +39,7 @@ const Footer = () => {
           <Link to="/">
             Voir tout
           </Link>
-           <Link to='/mentions-legales'>
+          <Link to='/mentions-legales'>
             Mentions légales
           </Link>
           <Link to='/contact'>

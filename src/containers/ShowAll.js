@@ -105,43 +105,38 @@ const ShowAll = () => {
     return (
         <main className="mx-10">
             {/* Phrase YAQD */}
-            <div className="text-center mt-28">
-                <p className="font-spicyRice text-6xl text-white">
-                    <span className="text-outline mx-1">
-                        Y'avait quoi déjà
-                    </span>
-                    {
-                        selectedChaine ? (
-                            <span className={
-                                (selectedChaine === "Gulli" || selectedChaine === "France 5" || selectedChaine === "Piwi")
-                                    ? "text-green-500"
-                                    : (selectedChaine === "Tf1" || selectedChaine === "M6" || selectedChaine === "Jetix")
-                                        ? "text-red-500"
-                                        : selectedChaine === "France 4"
-                                            ? "text-purple-500"
-                                            : (selectedChaine === "France 3" || selectedChaine === "Tiji") ?
-                                                "text-blue-400"
-                                                : (selectedChaine === "Canal J" || selectedChaine === "Teletoon+") ?
-                                                    "text-orange-400"
-                                                    : "text-gray-500"
-                            }>
-                                {" "}sur {selectedChaine} {" "}
-                            </span>
-                        ) : (
-                            <span className="bg-gradient-to-r from-fuchsia-500 via-yellow-400
+            <div className="font-spicyRice text-5xl md:text-6xl text-center mt-28 space-y-2 lg:flex justify-center items-baseline">
+                <div className="text-white text-outline md:pr-2">Y'avait quoi déjà
+                </div>
+                <div>
+                    {selectedChaine ? (
+                        <span className={
+                            (selectedChaine === "Gulli" || selectedChaine === "France 5" || selectedChaine === "Piwi")
+                                ? "text-green-500"
+                                : (selectedChaine === "Tf1" || selectedChaine === "M6" || selectedChaine === "Jetix")
+                                    ? "text-red-500"
+                                    : selectedChaine === "France 4"
+                                        ? "text-purple-500"
+                                        : (selectedChaine === "France 3" || selectedChaine === "Tiji") ?
+                                            "text-blue-400"
+                                            : (selectedChaine === "Canal J" || selectedChaine === "Teletoon+") ?
+                                                "text-orange-400"
+                                                : "text-gray-500"}>
+                            {" "} sur {selectedChaine} {" "}
+                        </span>
+                    ) :
+                        <span className="bg-gradient-to-r from-fuchsia-500 via-yellow-400
                     to-cyan-500 text-transparent bg-clip-text mx-2">
-                                à la télé
-                            </span>
-                        )
+                            à la télé
+                        </span>
                     }
-                    <span className="text-outline">?</span>
-                </p>
+                    <span className="text-white text-outline pl-1">?</span>
+                </div>
             </div>
-
 
             {/* Menus déroulants + barre de recherche */}
             <div className="container mt-16">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div className="relative">
                         {/* Menu déroulant des chaines */}
                         <button
@@ -168,7 +163,7 @@ const ShowAll = () => {
                             </svg>
                         </button>
                         {isChainesOpen && (
-                            <div className="absolute w-full mt-1 rounded bg-white shadow-lg dropdown-menu">
+                            <div className="absolute w-full mt-1 rounded bg-white shadow-lg dropdown-menu z-10">
                                 <ul>
                                     {chaines.map((chaine) => (
                                         <li
@@ -242,89 +237,30 @@ const ShowAll = () => {
                         goSearch={handleSearch}
                     />
                 </div>
-                {/* Filtres affichés */}
-                <div className="flex items-center gap-5 mt-5">
-                    {(selectedChaine || selectedGenre || searchTerm) && (
-                        <div className="flex px-4 py-2 mx-1 gap-3 text-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" fill="currentColor">
+
+            </div>
+            {/* Filtres affichés */}
+            <div className="mt-10 md:px-8">
+                {(selectedChaine || selectedGenre || searchTerm) && (
+                    <div className="flex justify-between items-baseline w-full font-medium text-sm md:text-lg">
+                        <div className="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px" fill="currentColor">
                                 <path d="M10 18h4a1 1 0 0 0 0-2h-4a1 1 0 1 0 0 2zm-4-6h12a1 1 0 0 0 0-2H6a1 1 0 0 0 0 2zm16-7a1 1 0 0 0-1-1H3a1 1 0 1 0 0 2h18a1 1 0 0 0 1-1z" />
                             </svg>
-                            Filtres :
+                            <span>Filtres :</span>
                         </div>
-                    )}
+                        <button className="text-sm md:text-base px-2 py-1 md:py-2 md:px-4 bg-white border rounded-full" onClick={resetFilters}>
+                            Supprimer les filtres
+                        </button>
+                    </div>
+                )}
+
+                <div className="flex flex-col md:flex-row items-start gap-3 mt-3">
                     {selectedChaine && (
-                            <div className="flex bg-white px-4 py-2 rounded-full border gap-3">
-                                <span className="font-wallop-medium"
-                                >
-                                    {selectedChaine}
-                                </span>
-                                <button onClick={() => {
-                                    setSelectedChaine(null);
-                                }}>
-                                    <svg
-                                        className="w-2 h-2"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 14 14"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                                        />
-                                    </svg>
-                                </button>
-                            </div>
-
-                    )}
-                    {selectedGenre && (
-                            <div className={`flex px-4 py-2 mx-1 rounded-full border gap-3 ${genreClass}`}>
-                                <span className="font-wallop-medium"
-                                > 
-                                    {selectedGenre}
-                                </span>
-                                <button onClick={() => {
-                                    setSelectedGenre(null);
-                                }}>
-                                    <svg
-                                        className="w-2 h-2"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 14 14"
-                                    >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                                        />
-                                    </svg>
-                                </button>
-                            </div>
-
-                    )}
-                    {searchTerm && (
-                        <div className="flex bg-white px-4 py-2 mx-1 rounded-full border gap-3">
-                            Ma recherche :
-                            <span className="mx-1 font-wallop-medium"
-                            >
-                                {searchTerm}
-                            </span>
-                            <button onClick={() => {
-                                setSearchTerm("");
-                            }}>
-                                <svg
-                                    className="w-2 h-2"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 14 14"
-                                >
+                        <div className="flex justify-between px-3 py-1 bg-white rounded-full border gap-2 max-w-xs">
+                            <span className="font-wallop-medium truncate">{selectedChaine}</span>
+                            <button onClick={() => setSelectedChaine(null)}>
+                                <svg className="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                     <path
                                         stroke="currentColor"
                                         strokeLinecap="round"
@@ -335,17 +271,42 @@ const ShowAll = () => {
                                 </svg>
                             </button>
                         </div>
-                    )
-                    }
-                    {(selectedChaine || selectedGenre || searchTerm) && (
-                        <button className="bg-white ml-auto mx-10 px-4 py-2 rounded-full border gap-3" onClick={resetFilters}>
-                            Supprimer les filtres
-                        </button>
+                    )}
+                    {selectedGenre && (
+                        <div className={`flex justify-between px-3 py-1 rounded-full gap-2 max-w-xs ${genreClass}`}>
+                            <span className="font-wallop-medium truncate">{selectedGenre}</span>
+                            <button onClick={() => setSelectedGenre(null)}>
+                                <svg className="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
                     )}
                 </div>
+
+                {searchTerm && (
+                    <div className="flex justify-between mt-3 px-3 py-3 text-sm md:text-base bg-white rounded-full border gap-2 max-w-xs">
+                        <span className="truncate">Ma recherche : {searchTerm}</span>
+                        <button onClick={() => setSearchTerm("")}>
+                            <svg className="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                )}
             </div>
-
-
             {/* Bulles animations  */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center my-28">
                 {loading
