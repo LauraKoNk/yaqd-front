@@ -24,7 +24,7 @@ const Contact = () => {
             </div>
             {/* Formulaire */}
             <div class="p-6 mb-16">
-                <h2 class="text-5xl font-wallop-semibold text-black text-center mt-4 mb-12">Contactez-nous</h2>
+                <h2 class="text-5xl font-wallop-semibold text-black text-center mt-4 mb-12">Contacte-nous</h2>
                 <form name="contact" method="POST" class="space-y-6 max-w-lg mx-auto" data-netlify="true" onSubmit="submit">
                     <div>
                     <input type="hidden" name="form-name" value="contact" />
