@@ -24,10 +24,12 @@ const Footer = () => {
 
   return (
     <>
-      <div className="bg-black text-white space-y-5 md:space-y-0  p-16 md:flex md:justify-between font-wallop-semibold">
-        <div className="md:hidden flex flex-col items-center space-y-7">
+     <div className="bg-black text-white space-y-5 md:space-y-0  p-16 md:flex md:justify-between font-wallop-semibold">
+        <div className="md:hidden flex flex-col space-y-8">
+          <div className="w-full flex justify-center">
           <img src="/assets/YAQD-logo.png" alt="Logo" className="md:hidden h-20" />
-          <p className="md:hidden pl-4 pt-3 pb-8 text-sm text-balance max-w-[250px]"> Tous les programmes jeunesses des années 2000 et + qui ont bercé ton enfance sont recensés ici.</p>
+          </div>
+          <p className="md:hidden pl-0 pb-8 text-sm text-balance max-w-[250px]"> Tous les programmes jeunesses des années 2000 et + qui ont bercé ton enfance sont recensés ici.</p>
         </div>
         <div className="leftSide">
           <img src="/assets/YAQD-logo.png" alt="Logo" className="hidden md:block md:h-16 md:pl-10" />
