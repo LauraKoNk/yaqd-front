@@ -24,18 +24,27 @@ const Footer = () => {
 
   return (
     <>
-      <div className="bg-black text-white p-16 flex justify-between font-wallop-semibold">
+      <div className="bg-black text-white space-y-5 md:space-y-0  p-16 md:flex md:justify-between font-wallop-semibold">
+        <div className="md:hidden flex flex-col items-center space-y-7">
+        <img src="/assets/YAQD-logo.png" alt="Logo" className="md:hidden h-20"/>
+        <p className="md:hidden pt-5 text-sm"> Tous les programmes jeunesses des années 2000 et + qui ont bercé ton enfance sont recensés ici.</p>
+        </div>
         <div className="leftSide">
-          <img src="/assets/YAQD-logo.png" alt="Logo" className="h-16 pl-10" />
-          <p className="pt-5 text-sm text-balance max-w-[250px]">
+          <img src="/assets/YAQD-logo.png" alt="Logo" className="hidden md:block md:h-16 md:pl-10"/>
+          <p className="hidden md:block pt-5 text-sm text-balance md:max-w-[250px]">
             Tous les programmes jeunesses des années 2000 et + qui ont bercé ton enfance sont recensés ici.
           </p>
         </div>
-        <div className="flex gap-5">
-          <Link to="/">Voir tout </Link>
-          <Link to="/mentions-legales">Mentions légales </Link>
-          <Link to="/contact"> Contact</Link>
-          {user && <Link to="/indexAdmin">Admin</Link>}
+        <div className="rightSide flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-5">
+          <Link to="/">
+            Voir tout
+          </Link>
+           <Link to='/mentions-legales'>
+            Mentions légales
+          </Link>
+          <Link to='/contact'>
+            Contact
+          </Link>
           {user ?
             <button onClick={handleLogout} className="text-white border rounded px-4 h-7">
               Déconnexion
