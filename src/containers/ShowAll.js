@@ -145,7 +145,7 @@ const ShowAll = () => {
                     <div className="relative">
                         {/* Menu déroulant des chaines */}
                         <button
-                            className="w-full text-gray-700 py-2 px-4 rounded border border-gray-200 focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
+                            className="w-full bg-white text-gray-700 py-2 px-4 rounded border border-gray-200 focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
                             type="button"
                             onClick={toggleDropdownChaines}
                         >
@@ -185,7 +185,7 @@ const ShowAll = () => {
                     {/* Menu déroulant des genre */}
                     <div className="relative">
                         <button
-                            className="w-full text-gray-700 py-2 px-4 rounded border border-gray-200 focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
+                            className="w-full bg-white text-gray-700 py-2 px-4 rounded border border-gray-200 focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
                             type="button"
                             onClick={toggleDropdownGenres}
                         >
@@ -253,7 +253,7 @@ const ShowAll = () => {
                         </div>
                     )}
                     {selectedChaine && (
-                            <div className="flex px-4 py-2 rounded-full border gap-3">
+                            <div className="flex bg-white px-4 py-2 rounded-full border gap-3">
                                 <span className="font-wallop-medium"
                                 >
                                     {selectedChaine}
@@ -309,7 +309,7 @@ const ShowAll = () => {
 
                     )}
                     {searchTerm && (
-                        <div className="flex px-4 py-2 mx-1 rounded-full border gap-3">
+                        <div className="flex bg-white px-4 py-2 mx-1 rounded-full border gap-3">
                             Ma recherche :
                             <span className="mx-1 font-wallop-medium"
                             >
@@ -338,7 +338,7 @@ const ShowAll = () => {
                     )
                     }
                     {(selectedChaine || selectedGenre || searchTerm) && (
-                        <button className="ml-auto mx-10 px-4 py-2 rounded-full border gap-3" onClick={resetFilters}>
+                        <button className="bg-white ml-auto mx-10 px-4 py-2 rounded-full border gap-3" onClick={resetFilters}>
                             Supprimer les filtres
                         </button>
                     )}

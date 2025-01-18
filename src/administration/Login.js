@@ -46,7 +46,7 @@ const Login = () => {
   <>
     <form
       onSubmit={handleSubmit}
-      className="max-w-sm mx-auto mt-10 p-6 border rounded shadow"
+      className="max-w-sm mx-auto my-14 p-6 border rounded shadow"
     >
       <h2 className="text-xl font-bold mb-4">Connexion</h2>
       <label className="block mb-2">
