@@ -12,7 +12,6 @@ const Card = ({ diffusion }) => {
                 <div class="w-40 h-40 rounded-full overflow-hidden mx-auto shadow-lg cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-2"
                     onClick={() => {
                         setShow(true)
-                        console.log("ouvert")
                     }}
                 >
                     <img

@@ -4,7 +4,7 @@ const CardModal = ({ setShow, diffusion }) => {
     return (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
             <div
-                className="bg-white max-w-lg w-full max-h-[80vh] overflow-y-auto p-6 border-2 border-gray-300/50 
+                className="bg-white m-3 md:m-0 lg:m-0 max-w-sm md:max-w-md lg:max-w-lg w-full max-h-[80vh] overflow-y-auto p-6 md:p-9 border-2 border-gray-300/50 
             rounded-lg shadow-md flex flex-col"
             >
                 {/* Bouton de fermeture */}
@@ -35,22 +35,21 @@ const CardModal = ({ setShow, diffusion }) => {
                 </button>
 
                 {/* Bloc image et titre */}
-                <div className="flex justify-evenly items-center mb-6">
+                <div className="flex flex-col items-center mb-6">
                     <img
-                        className="object-cover w-40 h-40 rounded-full shadow-md mb-4"
+                        className="object-cover w-32 h-32 md:w-40 md:h-40 rounded-full shadow-md mb-4"
                         src={diffusion.image}
                         alt="image"
                     />
                     <h1
-                        className="text-3xl font-wallop-semibold text-center break-words"
+                        className="text-2xl text-balance md:text-3xl font-wallop-semibold text-center"
                     >
                         {diffusion.titre}
                     </h1>
                 </div>
 
-
                 {/* Informations détaillées */}
-                <div className="w-full text-left space-y-3">
+                <div className="w-full text-left space-y-4">
                     <div className="flex">
                         {diffusion.genre.map((genre, index) => {
                             const colorClasses = {
@@ -77,44 +76,43 @@ const CardModal = ({ setShow, diffusion }) => {
                     </div>
                     <div className="flex">
                         <p className="font-wallop-medium text-lg">
-                            <span className="font-wallop-semibold text-lg mr-2">Année :</span>
+                            <span className="font-wallop-semibold mr-2">Année :</span>
                             {diffusion.annee_premiere_diffusion}
                         </p>
                     </div>
                     <div className="flex">
                         <p className="font-wallop-medium text-lg">
-                            <span className="font-wallop-semibold text-lg mr-2">Chaîne(s) :</span>
+                            <span className="font-wallop-semibold mr-2">Chaîne(s) :</span>
                             {diffusion.chaines.join(', ')}
                         </p>
                     </div>
                     <div className="flex">
                         <p className="font-wallop-medium text-lg">
-                            <span className="font-wallop-semibold text-lg mr-2">Format :</span>
+                            <span className="font-wallop-semibold mr-2">Format :</span>
                             {diffusion.format}
                         </p>
                     </div>
                      <div className="flex">
                         <p className="font-wallop-medium text-lg">
-                            <span className="font-wallop-semibold text-lg mr-2">Pays :</span>
+                            <span className="font-wallop-semibold mr-2">Pays :</span>
                             {diffusion.pays.join(', ')}
                         </p>
                     </div>
                     <div className="flex">
                         <p className="font-wallop-medium text-lg">
-                            <span className="font-wallop-semibold text-lg mr-2">Studio :</span>
+                            <span className="font-wallop-semibold mr-2">Studio :</span>
                             {diffusion.studio}
                         </p>
                     </div>
                     <div className="flex">
                         <p className="font-wallop-medium text-lg">
-                            <span className="font-wallop-semibold text-lg mr-2">Synopsis :</span>
+                            <span className="font-wallop-semibold mr-2">Synopsis :</span>
                             {diffusion.synopsis}
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-
     );
 };
 

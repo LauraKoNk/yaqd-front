@@ -308,7 +308,7 @@ const ShowAll = () => {
                 )}
             </div>
             {/* Bulles animations  */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center my-28">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 text-center my-24">
                 {loading
                     ? Array.from({ length: 4 }).map((_, index) => (
                         <SkeletonCard key={index} />  // Affiche les skeleton cards
