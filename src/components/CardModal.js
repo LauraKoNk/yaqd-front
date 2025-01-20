@@ -2,15 +2,15 @@
 const CardModal = ({ setShow, diffusion }) => {
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-card-bg flex justify-center items-center z-50">
             <div
-                className="bg-white m-3 md:m-0 lg:m-0 max-w-sm md:max-w-md lg:max-w-lg w-full max-h-[80vh] overflow-y-auto p-6 md:p-9 border-2 border-gray-300/50 
+                className="bg-general-bg m-3 md:m-0 lg:m-0 max-w-sm md:max-w-md lg:max-w-lg w-full max-h-[80vh] overflow-y-auto p-6 md:p-9 border-2 border-general-border
             rounded-lg shadow-md flex flex-col"
             >
                 {/* Bouton de fermeture */}
                 <button
                     type="button"
-                    className="text-black bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 p-2 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    className="text-svg-color bg-transparent hover:bg-general-hover hover:text-svg-color rounded-md text-sm w-8 h-9 p-2 ms-auto inline-flex justify-center items-center"
                     onClick={(e) => {
                         setShow(false);
                         e.stopPropagation();
@@ -42,14 +42,14 @@ const CardModal = ({ setShow, diffusion }) => {
                         alt="image"
                     />
                     <h1
-                        className="text-2xl text-balance md:text-3xl font-wallop-semibold text-center"
+                        className="text-2xl text-card-text-color text-balance md:text-3xl font-wallop-semibold text-center"
                     >
                         {diffusion.titre}
                     </h1>
                 </div>
 
                 {/* Informations détaillées */}
-                <div className="w-full text-left space-y-4">
+                <div className="w-full text-left space-y-4 text-card-text-color">
                     <div className="flex">
                         {diffusion.genre.map((genre, index) => {
                             const colorClasses = {

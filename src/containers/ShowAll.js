@@ -4,7 +4,7 @@ import SearchBar from "../components/SearchBar";
 import { useState, useEffect } from "react";
 const apiUrl = process.env.REACT_APP_API_URL;
 
-const ShowAll = () => {
+const ShowAll = ({theme}) => {
     const [diffusions, setDiffusions] = useState([]);
     const [chaines, setChaines] = useState([]);
     const [selectedChaine, setSelectedChaine] = useState(null);
@@ -106,8 +106,9 @@ const ShowAll = () => {
         <main className="mx-10">
             {/* Phrase YAQD */}
             <div className="font-spicyRice text-5xl md:text-6xl text-center mt-28 space-y-2 lg:flex justify-center items-baseline">
-                <div className="text-white text-outline md:pr-2">Y'avait quoi déjà
-                </div>
+            {theme === 'dark' ? <div className="text-gray-50 md:pr-2">Y'avait quoi déjà
+                </div> : <div className="text-white text-outline md:pr-2">Y'avait quoi déjà
+                </div>}
                 <div>
                     {selectedChaine ? (
                         <span className={
@@ -130,7 +131,8 @@ const ShowAll = () => {
                             à la télé
                         </span>
                     }
-                    <span className="text-white text-outline pl-1">?</span>
+                    {theme === 'dark' ? <span className="text-gray-50 pl-1">?
+                    </span> : <span className="text-white text-outline pl-1">?</span>}
                 </div>
             </div>
 
@@ -140,7 +142,7 @@ const ShowAll = () => {
                     <div className="relative">
                         {/* Menu déroulant des chaines */}
                         <button
-                            className="w-full bg-white text-gray-700 py-2 px-4 rounded border border-gray-200 focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
+                            className="w-full bg-general-bg text-filters-title py-2 px-4 rounded border border-general-border focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
                             type="button"
                             onClick={toggleDropdownChaines}
                         >
@@ -163,12 +165,12 @@ const ShowAll = () => {
                             </svg>
                         </button>
                         {isChainesOpen && (
-                            <div className="absolute w-full mt-1 rounded bg-white shadow-lg dropdown-menu z-10">
+                            <div className="absolute w-full mt-1 rounded bg-general-bg border border-filters-border text-filters-selected-title shadow-lg dropdown-menu z-10">
                                 <ul>
                                     {chaines.map((chaine) => (
                                         <li
                                             key={chaine._id}
-                                            className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                            className="py-2 px-4 hover:bg-general-hover cursor-pointer"
                                             onClick={() => handleClickedChannel(chaine)}>
                                             {chaine.nom}
                                         </li>
@@ -180,7 +182,7 @@ const ShowAll = () => {
                     {/* Menu déroulant des genre */}
                     <div className="relative">
                         <button
-                            className="w-full bg-white text-gray-700 py-2 px-4 rounded border border-gray-200 focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
+                            className="w-full bg-general-bg text-filters-title py-2 px-4 rounded border border-general-border focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
                             type="button"
                             onClick={toggleDropdownGenres}
                         >
@@ -203,31 +205,31 @@ const ShowAll = () => {
                             </svg>
                         </button>
                         {isGenresOpen && (
-                            <div className="absolute w-full mt-1 rounded bg-white shadow-lg dropdown-menu">
+                            <div className="absolute w-full mt-1 rounded bg-general-bg border border-filters-border text-filters-selected-title shadow-lg dropdown-menu z-10">
                                 <ul>
                                     <li
-                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
                                         onClick={() => handleClickedGenre("Action")}>Action</li>
                                     <li
-                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
                                         onClick={() => handleClickedGenre("Amitié")}>Amitié</li>
                                     <li
-                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
                                         onClick={() => handleClickedGenre("Aventure")}>Aventure</li>
                                     <li
-                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
                                         onClick={() => handleClickedGenre("Comédie")}>Comédie</li>
                                     <li
-                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
                                         onClick={() => handleClickedGenre("Educatif")}>Educatif</li>
                                     <li
-                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
                                         onClick={() => handleClickedGenre("Fantaisie")}>Fantaisie</li>
                                     <li
-                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
                                         onClick={() => handleClickedGenre("Fantastique")}>Fantastique</li>
                                     <li
-                                        className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
                                         onClick={() => handleClickedGenre("Science-fiction")}>Science-fiction</li>
                                 </ul>
                             </div>
@@ -237,19 +239,18 @@ const ShowAll = () => {
                         goSearch={handleSearch}
                     />
                 </div>
-
             </div>
             {/* Filtres affichés */}
             <div className="mt-10 md:px-8">
                 {(selectedChaine || selectedGenre || searchTerm) && (
                     <div className="flex justify-between items-baseline w-full font-medium text-sm md:text-lg">
                         <div className="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px" fill="currentColor">
+                            <svg className="text-filters-title" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px" fill="currentColor">
                                 <path d="M10 18h4a1 1 0 0 0 0-2h-4a1 1 0 1 0 0 2zm-4-6h12a1 1 0 0 0 0-2H6a1 1 0 0 0 0 2zm16-7a1 1 0 0 0-1-1H3a1 1 0 1 0 0 2h18a1 1 0 0 0 1-1z" />
                             </svg>
-                            <span>Filtres :</span>
+                            <span className="text-title-color">Filtres :</span>
                         </div>
-                        <button className="text-sm md:text-base px-2 py-1 md:py-2 md:px-4 bg-white border rounded-full" onClick={resetFilters}>
+                        <button className="text-sm text-filters-selected-title md:text-base px-2 py-1 md:py-2 md:px-4 bg-general-bg border rounded-full" onClick={resetFilters}>
                             Supprimer les filtres
                         </button>
                     </div>
@@ -257,7 +258,7 @@ const ShowAll = () => {
 
                 <div className="flex flex-col md:flex-row items-start gap-3 mt-3">
                     {selectedChaine && (
-                        <div className="flex justify-between px-3 py-1 bg-white rounded-full border gap-2 max-w-xs">
+                        <div className="flex justify-between px-3 py-1 bg-general-bg rounded-full border gap-2 max-w-xs text-filters-selected-title">
                             <span className="font-wallop-medium truncate">{selectedChaine}</span>
                             <button onClick={() => setSelectedChaine(null)}>
                                 <svg className="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -291,7 +292,7 @@ const ShowAll = () => {
                 </div>
 
                 {searchTerm && (
-                    <div className="flex justify-between mt-3 px-3 py-3 text-sm md:text-base bg-white rounded-full border gap-2 max-w-xs">
+                    <div className="flex justify-between mt-3 px-3 py-3 text-sm md:text-base bg-general-bg rounded-full border gap-2 max-w-xs text-filters-selected-title">
                         <span className="truncate">Ma recherche : {searchTerm}</span>
                         <button onClick={() => setSearchTerm("")}>
                             <svg className="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -317,10 +318,10 @@ const ShowAll = () => {
                         <Card key={diffusion._id} diffusion={diffusion} />
                     ))) : <div className="flex items-center justify-center col-span-full mb-7 gap-3">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-title-color">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
                         </svg>
-                        <p className="text-xl font-semibold">Aucun résultat trouvé</p>
+                        <p className="text-xl text-title-color font-semibold">Aucun résultat trouvé</p>
                     </div>}
             </div>
         </main>

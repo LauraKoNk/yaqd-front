@@ -46,7 +46,7 @@ const Login = () => {
   <>
     <form
       onSubmit={handleSubmit}
-      className="max-w-sm mx-auto my-14 p-6 border rounded shadow"
+      className="text-card-text-color max-w-sm mx-auto mt-10 p-6 border border-general-border rounded shadow"
     >
       <h2 className="text-xl font-bold mb-4">Connexion</h2>
       <label className="block mb-2">
@@ -57,7 +57,7 @@ const Login = () => {
           value={formData.email}
           onChange={handleChange}
           required
-          className="block w-full mt-1 p-2 border rounded"
+          className="block w-full mt-1 p-2 border border-general-border rounded bg-general-bg"
         />
       </label>
       <label className="block mb-4">
@@ -68,7 +68,7 @@ const Login = () => {
           value={formData.password}
           onChange={handleChange}
           required
-          className="block w-full mt-1 p-2 border rounded"
+          className="block w-full mt-1 p-2 border border-general-border rounded bg-general-bg"
         />
       </label>
       <button

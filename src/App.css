@@ -22,3 +22,41 @@
   }
 }
 
+.light {
+  background-color:#fbfbfb;
+  --title-color: 0,0,0;
+  --general-bg: 255,255,255;
+  --card-bg: 0,0,0,0.5;
+  --general-hover: 243,244,246;
+  --general-border: 229,231,235;
+  --filters-border:255,255,255;
+  --form-border: 209,213,219;
+  --form-button-border: 31,41,55;
+  --form-button-hover: 31,41,55;
+  --form-button-textPreTransform: 0,0,0;
+  --form-button-textPostTransform: 255,255,255;
+  --filters-title: 55,65,81;
+  --card-text-color:0,0,0;
+  --svg-color: 55,65,81;
+  --ring-color: 161,161,170;
+}
+
+.dark {
+  background-color: #000000;
+  --title-color: 255,255,255;
+  --general-bg: 0,0,0;
+  --card-bg: 0,0,0,0.8;
+  --general-hover: 31, 41, 55, 0.5;
+  --general-border: 31, 41, 55;
+  --filters-border:31, 41, 55;
+  --form-border: 31, 41, 55;
+  --form-button-border: 31,41,55;
+  --form-button-hover: 31,41,55, 0.8;
+  --form-button-textPreTransform: 209,213,219;
+  --form-button-textPostTransform: 255,255,255;
+  --filters-title: 75, 85, 99;
+  --filters-selected-title: 209,213,219;
+  --card-text-color: 209,213,219;
+  --svg-color: 31, 41, 55;
+  --ring-color: 107,114,128;
+}

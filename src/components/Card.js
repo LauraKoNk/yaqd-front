@@ -19,7 +19,7 @@ const Card = ({ diffusion }) => {
                         class="object-cover w-full h-full"
                     />
                 </div>
-                <h2 class="mt-4 text-xl break-words font-wallop-medium text-black">{diffusion.titre}</h2>
+                <h2 class="mt-4 text-xl break-words font-wallop-medium text-title-color">{diffusion.titre}</h2>
                 {show && <CardModal setShow={setShow} diffusion={diffusion} />}
             </div>
         </>
