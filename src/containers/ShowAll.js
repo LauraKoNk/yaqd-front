@@ -1,6 +1,7 @@
 import Card from "../components/Card";
 import SkeletonCard from "../components/SkeletonCard";
 import SearchBar from "../components/SearchBar";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 import { useState, useEffect } from "react";
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -324,6 +325,7 @@ const ShowAll = ({theme}) => {
                         <p className="text-xl text-title-color font-semibold">Aucun résultat trouvé</p>
                     </div>}
             </div>
+            <ScrollToTopButton />
         </main>
     );
 };
