@@ -113,11 +113,11 @@ const ShowAll = ({theme}) => {
                 <div>
                     {selectedChaine ? (
                         <span className={
-                            (selectedChaine === "Gulli" || selectedChaine === "France 5" || selectedChaine === "Piwi")
+                            (selectedChaine === "Gulli" || selectedChaine === "France 5" || selectedChaine === "Piwi" || selectedChaine === "Disney XD")
                                 ? "text-green-500"
                                 : (selectedChaine === "Tf1" || selectedChaine === "M6" || selectedChaine === "Jetix")
                                     ? "text-red-500"
-                                    : selectedChaine === "France 4"
+                                    : (selectedChaine === "France 4" || selectedChaine === "Disney Channel")
                                         ? "text-purple-500"
                                         : (selectedChaine === "France 3" || selectedChaine === "Tiji") ?
                                             "text-blue-400"

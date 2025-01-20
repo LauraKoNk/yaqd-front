@@ -111,7 +111,7 @@ const AllAnimation = () => {
                                             {animation.genre.join(", ")}
                                         </td>
                                         <td className="border border-gray-300 px-4 py-2">{animation.format}</td>
-                                        <td className="border border-gray-300 px-4 py-2 line-clamp-3">
+                                        <td className="border border-gray-300 px-4 py-2 line-clamp-4 overflow-y-auto">
                                             {animation.synopsis}
                                         </td>
                                         <td className="border border-gray-300 px-4 py-2">

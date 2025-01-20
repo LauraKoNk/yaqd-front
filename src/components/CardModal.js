@@ -10,7 +10,7 @@ const CardModal = ({ setShow, diffusion }) => {
                 {/* Bouton de fermeture */}
                 <button
                     type="button"
-                    className="text-svg-color bg-transparent hover:bg-general-hover hover:text-svg-color rounded-md text-sm w-8 h-9 p-2 ms-auto inline-flex justify-center items-center"
+                    className="text-title-color bg-transparent hover:bg-general-hover hover:text-title-color rounded-md text-sm w-8 h-9 p-2 ms-auto inline-flex justify-center items-center"
                     onClick={(e) => {
                         setShow(false);
                         e.stopPropagation();
@@ -50,7 +50,7 @@ const CardModal = ({ setShow, diffusion }) => {
 
                 {/* Informations détaillées */}
                 <div className="w-full text-left space-y-4 text-card-text-color">
-                    <div className="flex">
+                    <div className="flex overflow-x-auto">
                         {diffusion.genre.map((genre, index) => {
                             const colorClasses = {
                                 "Action": "bg-red-200 text-red-700",

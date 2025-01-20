@@ -28,7 +28,7 @@ const SearchBar = ({ goSearch, chaine, genre }) => {
                     {/* Flèche du popover */}
                     <div className="absolute -top-2 left-1/4 transform -translate-x-1/2 w-3.5 h-3.5 bg-general-bg border-l border-t border-form-border rotate-45"></div>
                 </div>
-                <div className="px-3 py-3">
+                <div className="px-4 py-6">
                     <p>Supprime les filtres pour plus de résultats.</p>
                 </div>
             </div>

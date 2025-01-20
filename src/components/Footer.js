@@ -37,7 +37,7 @@ const Footer = () => {
             Tous les programmes jeunesses des années 2000 et + qui ont bercé ton enfance sont recensés ici.
           </p>
         </div>
-        <div className="rightSide flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-5">
+        <div className="rightSide flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-5">
           <Link to="/">
             Voir tout
           </Link>
@@ -47,10 +47,12 @@ const Footer = () => {
           <Link to='/contact'>
             Contact
           </Link>
-          {user ?
-            <button onClick={handleLogout} className="text-white border rounded px-4 h-7">
+          {user ? <><Link to='/indexAdmin'>
+          Admin
+        </Link>
+            <button onClick={handleLogout} className="text-white border rounded px-4 h-7 w-36">
               Déconnexion
-            </button> : <Link to="/login">Login</Link>
+            </button> </> : <Link to="/login">Login</Link>
           }
         </div>
       </div>
