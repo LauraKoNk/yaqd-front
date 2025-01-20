@@ -236,7 +236,7 @@ const ShowAll = ({theme}) => {
                         )}
                     </div>
                     <SearchBar
-                        goSearch={handleSearch}
+                        goSearch={handleSearch} chaine={selectedChaine} genre={selectedGenre}
                     />
                 </div>
             </div>
