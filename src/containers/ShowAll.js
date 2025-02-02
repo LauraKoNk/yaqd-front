@@ -94,12 +94,14 @@ const ShowAll = ({theme}) => {
     const colorClasses = {
         "Action": "bg-red-200 text-red-700",
         "Amitié": "bg-purple-200 text-purple-700",
-        "Aventure": "bg-green-200 text-green-700",
+        "Aventure": "bg-lime-200 text-lime-700",
         "Comédie": "bg-yellow-200 text-yellow-800",
         "Educatif": "bg-orange-200 text-orange-700",
         "Fantastique": "bg-amber-600 text-amber-950",
         "Fantaisie": "bg-pink-200 text-pink-700",
-        "Science-fiction": "bg-indigo-200 text-indigo-700"
+        "Musical": "bg-green-200 text-green-700",
+        "Science-fiction": "bg-indigo-200 text-indigo-700",
+        "Sport": "bg-teal-200 text-teal-700"
     };
     const genreClass = colorClasses[selectedGenre]
 
@@ -231,7 +233,13 @@ const ShowAll = ({theme}) => {
                                         onClick={() => handleClickedGenre("Fantastique")}>Fantastique</li>
                                     <li
                                         className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                        onClick={() => handleClickedGenre("Musical")}>Musical</li>
+                                    <li
+                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
                                         onClick={() => handleClickedGenre("Science-fiction")}>Science-fiction</li>
+                                        <li
+                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                        onClick={() => handleClickedGenre("Sport")}>Sport</li>
                                 </ul>
                             </div>
                         )}
