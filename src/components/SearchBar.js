@@ -14,8 +14,8 @@ const SearchBar = ({ goSearch, chaine, genre }) => {
         >
             <input
                 type="text"
-                placeholder="Que recherches-tu ?"
-                className="w-full bg-general-bg text-filters-title py-2 px-4 rounded border border-general-border focus:border-ring-color focus:outline-none focus:shadow-outline"
+                placeholder="Quel programme recherches-tu ?"
+                className="w-full bg-general-bg text-filters-title text-xs md:text-sm sm:text-base py-2 px-4 rounded border border-general-border focus:border-ring-color focus:outline-none focus:shadow-outline"
                 value={input}
                 onChange={event => {
                     setInput(event.target.value);

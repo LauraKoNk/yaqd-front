@@ -54,15 +54,17 @@ const CardModal = ({ setShow, diffusion }) => {
                         {diffusion.genre.map((genre, index) => {
                             const colorClasses = {
                                 "Action": "bg-red-200 text-red-700",
-                                "Amitié": "bg-purple-200 text-purple-700",
                                 "Aventure": "bg-lime-200 text-lime-700",
                                 "Comédie": "bg-yellow-200 text-yellow-800",
+                                "Drame": "bg-purple-200 text-purple-700",
                                 "Educatif": "bg-orange-200 text-orange-700",
                                 "Fantastique": "bg-amber-600 text-amber-950",
-                                "Fantaisie": "bg-pink-200 text-pink-700",
-                                "Musical": "bg-green-200 text-green-700",
+                                "Fantaisie": "bg-fuchsia-200 text-fuchsia-700",
+                                "Musical": "bg-sky-200 text-sky-700",
+                                "Romance": "bg-pink-200 text-pink-700",
                                 "Science-fiction": "bg-indigo-200 text-indigo-700",
-                                "Sport": "bg-teal-200 text-teal-700"
+                                "Sport": "bg-teal-200 text-teal-700",
+                                "Tranche de vie": "bg-cyan-200 text-cyan-700"
                             };
                             const genreClass = colorClasses[genre] || "bg-orange-200 text-orange-700";
 
@@ -94,7 +96,7 @@ const CardModal = ({ setShow, diffusion }) => {
                             {diffusion.format}
                         </p>
                     </div>
-                     <div className="flex">
+                    <div className="flex">
                         <p className="font-wallop-medium text-lg">
                             <span className="font-wallop-semibold mr-2">Pays :</span>
                             {diffusion.pays.join(', ')}

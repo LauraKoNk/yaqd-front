@@ -5,7 +5,7 @@ import ScrollToTopButton from "../components/ScrollToTopButton";
 import { useState, useEffect } from "react";
 const apiUrl = process.env.REACT_APP_API_URL;
 
-const ShowAll = ({theme}) => {
+const ShowAll = ({ theme, handleToTop }) => {
     const [diffusions, setDiffusions] = useState([]);
     const [chaines, setChaines] = useState([]);
     const [selectedChaine, setSelectedChaine] = useState(null);
@@ -93,15 +93,17 @@ const ShowAll = ({theme}) => {
     // Couleurs pour filtres genres affichés
     const colorClasses = {
         "Action": "bg-red-200 text-red-700",
-        "Amitié": "bg-purple-200 text-purple-700",
         "Aventure": "bg-lime-200 text-lime-700",
         "Comédie": "bg-yellow-200 text-yellow-800",
+        "Drame": "bg-purple-200 text-purple-700",
         "Educatif": "bg-orange-200 text-orange-700",
         "Fantastique": "bg-amber-600 text-amber-950",
-        "Fantaisie": "bg-pink-200 text-pink-700",
-        "Musical": "bg-green-200 text-green-700",
+        "Fantaisie": "bg-fuchsia-200 text-fuchsia-700",
+        "Musical": "bg-sky-200 text-sky-700",
+        "Romance": "bg-pink-200 text-pink-700",
         "Science-fiction": "bg-indigo-200 text-indigo-700",
-        "Sport": "bg-teal-200 text-teal-700"
+        "Sport": "bg-teal-200 text-teal-700",
+        "Tranche de vie": "bg-cyan-200 text-cyan-700"
     };
     const genreClass = colorClasses[selectedGenre]
 
@@ -109,9 +111,13 @@ const ShowAll = ({theme}) => {
         <main className="mx-10">
             {/* Phrase YAQD */}
             <div className="font-spicyRice text-5xl md:text-6xl text-center mt-28 space-y-2 lg:flex justify-center items-baseline">
-            {theme === 'dark' ? <div className="text-gray-50 md:pr-2">Y'avait quoi déjà
-                </div> : <div className="text-white text-outline md:pr-2">Y'avait quoi déjà
-                </div>}
+                {theme === 'dark' ?
+                    (<div className="text-white md:pr-2">Y'avait quoi déjà
+                        {selectedChaine ? <span> {" "} sur</span> : ""}
+                    </div>
+                    ) : (<div className="text-white text-outline md:pr-2">Y'avait quoi déjà
+                        {selectedChaine ? <span> {" "} sur</span> : ""}
+                    </div>)}
                 <div>
                     {selectedChaine ? (
                         <span className={
@@ -123,10 +129,10 @@ const ShowAll = ({theme}) => {
                                         ? "text-purple-500"
                                         : (selectedChaine === "France 3" || selectedChaine === "Tiji") ?
                                             "text-blue-400"
-                                            : (selectedChaine === "Canal J" || selectedChaine === "Teletoon+") ?
+                                            : (selectedChaine === "Canal J" || selectedChaine === "Teletoon+" | selectedChaine === "Nickelodeon") ?
                                                 "text-orange-400"
-                                                : "text-gray-500"}>
-                            {" "} sur {selectedChaine} {" "}
+                                                : "text-gray-400"}>
+                            {selectedChaine} {" "}
                         </span>
                     ) :
                         <span className="bg-gradient-to-r from-fuchsia-500 via-yellow-400
@@ -134,7 +140,7 @@ const ShowAll = ({theme}) => {
                             à la télé
                         </span>
                     }
-                    {theme === 'dark' ? <span className="text-gray-50 pl-1">?
+                    {theme === 'dark' ? <span className="text-white pl-1">?
                     </span> : <span className="text-white text-outline pl-1">?</span>}
                 </div>
             </div>
@@ -167,20 +173,22 @@ const ShowAll = ({theme}) => {
                                 />
                             </svg>
                         </button>
-                        {isChainesOpen && (
-                            <div className="absolute w-full mt-1 rounded bg-general-bg border border-filters-border text-filters-selected-title shadow-lg dropdown-menu z-10">
-                                <ul>
-                                    {chaines.map((chaine) => (
-                                        <li
-                                            key={chaine._id}
-                                            className="py-2 px-4 hover:bg-general-hover cursor-pointer"
-                                            onClick={() => handleClickedChannel(chaine)}>
-                                            {chaine.nom}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
+                        <div className={`absolute w-full mt-1 rounded bg-general-bg border border-filters-border 
+    text-filters-selected-title shadow-lg dropdown-menu z-10
+    transition-all duration-300 ease-in-out
+    ${isChainesOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3 pointer-events-none"}
+  `}>
+                            <ul>
+                                {chaines.map((chaine) => (
+                                    <li
+                                        key={chaine._id}
+                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                        onClick={() => { handleClickedChannel(chaine); setIsChainesOpen(false); handleToTop() }}>
+                                        {chaine.nom}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                     {/* Menu déroulant des genre */}
                     <div className="relative">
@@ -207,42 +215,50 @@ const ShowAll = ({theme}) => {
                                 />
                             </svg>
                         </button>
-                        {isGenresOpen && (
-                            <div className="absolute w-full mt-1 rounded bg-general-bg border border-filters-border text-filters-selected-title shadow-lg dropdown-menu z-10">
-                                <ul>
-                                    <li
-                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
-                                        onClick={() => handleClickedGenre("Action")}>Action</li>
-                                    <li
-                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
-                                        onClick={() => handleClickedGenre("Amitié")}>Amitié</li>
-                                    <li
-                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
-                                        onClick={() => handleClickedGenre("Aventure")}>Aventure</li>
-                                    <li
-                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
-                                        onClick={() => handleClickedGenre("Comédie")}>Comédie</li>
-                                    <li
-                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
-                                        onClick={() => handleClickedGenre("Educatif")}>Educatif</li>
-                                    <li
-                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
-                                        onClick={() => handleClickedGenre("Fantaisie")}>Fantaisie</li>
-                                    <li
-                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
-                                        onClick={() => handleClickedGenre("Fantastique")}>Fantastique</li>
-                                    <li
-                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
-                                        onClick={() => handleClickedGenre("Musical")}>Musical</li>
-                                    <li
-                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
-                                        onClick={() => handleClickedGenre("Science-fiction")}>Science-fiction</li>
-                                        <li
-                                        className="py-2 px-4 hover:bg-general-hover cursor-pointer"
-                                        onClick={() => handleClickedGenre("Sport")}>Sport</li>
-                                </ul>
-                            </div>
-                        )}
+                        <div className={`absolute w-full mt-1 rounded bg-general-bg border border-filters-border 
+    text-filters-selected-title shadow-lg dropdown-menu z-10
+    transition-all duration-300 ease-in-out
+    ${isGenresOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}
+  `}>
+                            <ul>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Action"); setIsGenresOpen(false); handleToTop() }}>Action</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Aventure"); setIsGenresOpen(false); handleToTop() }}>Aventure</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Comédie"); setIsGenresOpen(false); handleToTop() }}>Comédie</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Drame"); setIsGenresOpen(false); handleToTop() }}>Drame</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Educatif"); setIsGenresOpen(false); handleToTop() }}>Educatif</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Fantaisie"); setIsGenresOpen(false); handleToTop() }}>Fantaisie</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Fantastique"); setIsGenresOpen(false); handleToTop() }}>Fantastique</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Musical"); setIsGenresOpen(false); handleToTop() }}>Musical</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Romance"); setIsGenresOpen(false); handleToTop() }}>Romance</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Science-fiction"); setIsGenresOpen(false); handleToTop() }}>Science-fiction</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Sport"); setIsGenresOpen(false); handleToTop() }}>Sport</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedGenre("Tranche de vie"); setIsGenresOpen(false); handleToTop() }}>Tranche de vie</li>
+                            </ul>
+                        </div>
                     </div>
                     <SearchBar
                         goSearch={handleSearch} chaine={selectedChaine} genre={selectedGenre}
