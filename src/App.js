@@ -43,6 +43,11 @@ function App() {
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
+
+  const handleToTop = () => {
+    window.scrollTo({ left: 0, top: 0, behavior: 'smooth' })
+  }
+
   return (
     <Router>
       {/* -------- Header ------ */}
@@ -50,7 +55,7 @@ function App() {
       <main>
         <Routes>
           {/* Navigation du site */}
-          <Route path='/' element={<ShowAll theme={theme}/>} />
+          <Route path='/' element={<ShowAll theme={theme} handleToTop={handleToTop}/>} />
           <Route path="/card" element={<CardModal />} />
           <Route path='/apropos' element={<About />} />
           <Route path='/mentions-legales' element={<LegalNotice />} />
@@ -71,7 +76,7 @@ function App() {
           <Route path='/signup' element={<PrivateRoute><SignUp /></PrivateRoute>} />
         </Routes>
       </main>
-      <Footer />
+      <Footer handleToTop={handleToTop}/>
       <ToastContainer
         position="bottom-left"
         autoClose={3000}

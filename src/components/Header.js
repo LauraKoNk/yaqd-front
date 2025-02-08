@@ -51,15 +51,14 @@ const Header = ({ toggleTheme, theme }) => {
                     </button>
                 </div>
             </div>
-            {show && (<div id="navbar-Links-Mobile" className="md:hidden flex flex-col gap-2 border-2 border-general-border rounded mx-8">
-                <Link className="pl-3 py-2 hover:bg-general-hover text-lg cursor-pointer" to="/">
+            <div id="navbar-Links-Mobile" className={`md:hidden flex flex-col gap-2 border-2 border-general-border rounded mx-8  transition-all duration-300 ease-in-out  ${show ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}>
+                <Link className="pl-3 py-2 hover:bg-general-hover text-lg cursor-pointer" to="/" onClick={() => setShow(false)}>
                     Voir tout
                 </Link>
-                <Link className="pl-3 py-2 hover:bg-general-hover text-lg cursor-pointer" to='/contact'>
+                <Link className="pl-3 py-2 hover:bg-general-hover text-lg cursor-pointer" to='/contact' onClick={() => setShow(false)}>
                     Contact
                 </Link>
-            </div>)
-            }
+            </div>
         </nav>
     );
 };

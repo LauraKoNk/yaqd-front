@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const Footer = () => {
+const Footer = ({handleToTop}) => {
   const [user, setUser] = useState(false); // Initialisation de l'état utilisateur
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const Footer = () => {
       <div className="bg-black text-white space-y-5 md:space-y-0 p-7 md:p-16 md:flex md:justify-between font-wallop-semibold">
         <div className="md:hidden flex flex-col space-y-8">
           <div className="w-full p-10 flex justify-center">
-          <img src="/assets/YAQD-logo.png" alt="Logo" className="md:hidden h-24" />
+            <img src="/assets/YAQD-logo.png" alt="Logo" className="md:hidden h-24" />
           </div>
           <p className="md:hidden pl-0 pb-8 text-sm text-balance max-w-[250px]"> Tous les programmes jeunesses des années 2000 et + qui ont bercé ton enfance sont recensés ici.</p>
         </div>
@@ -38,21 +38,22 @@ const Footer = () => {
           </p>
         </div>
         <div className="rightSide flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-5">
-          <Link to="/">
+          <Link to="/" onClick={handleToTop}>
             Voir tout
           </Link>
-          <Link to='/mentions-legales'>
+          <Link to='/mentions-legales' onClick={handleToTop}>
             Mentions légales
           </Link>
-          <Link to='/contact'>
+          <Link to='/contact' onClick={handleToTop}>
             Contact
           </Link>
-          {user ? <><Link to='/indexAdmin'>
+          {user ? <><Link to='/indexAdmin' onClick={handleToTop}>
           Admin
         </Link>
             <button onClick={handleLogout} className="text-white border rounded px-4 h-7 w-36">
               Déconnexion
-            </button> </> : <Link to="/login">Login</Link>
+            </button> </>
+           : <Link to="/login" onClick={handleToTop}>Login</Link>
           }
         </div>
       </div>
