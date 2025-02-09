@@ -13,6 +13,7 @@ import About from './components/About';
 import Footer from './components/Footer';
 import LegalNotice from './components/LegalNotice';
 import Contact from './components/Contact';
+import ScrollToTop from './components/ScrollToTop';
 
 // admin CRUD
 import IndexAdmin from './administration/IndexAdmin';
@@ -76,13 +77,14 @@ function App() {
           <Route path='/signup' element={<PrivateRoute><SignUp /></PrivateRoute>} />
         </Routes>
       </main>
-      <Footer handleToTop={handleToTop}/>
+      <Footer />
       <ToastContainer
         position="bottom-left"
         autoClose={3000}
         hideProgressBar={true}
         theme="light"
       />
+      <ScrollToTop />
     </Router>
   );
 }

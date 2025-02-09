@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const Footer = ({handleToTop}) => {
+const Footer = () => {
   const [user, setUser] = useState(false); // Initialisation de l'état utilisateur
   const navigate = useNavigate();
 
@@ -38,22 +38,22 @@ const Footer = ({handleToTop}) => {
           </p>
         </div>
         <div className="rightSide flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-5">
-          <Link to="/" onClick={handleToTop}>
+          <Link to="/">
             Voir tout
           </Link>
-          <Link to='/mentions-legales' onClick={handleToTop}>
+          <Link to='/mentions-legales'>
             Mentions légales
           </Link>
-          <Link to='/contact' onClick={handleToTop}>
+          <Link to='/contact'>
             Contact
           </Link>
-          {user ? <><Link to='/indexAdmin' onClick={handleToTop}>
+          {user ? <><Link to='/indexAdmin'>
           Admin
         </Link>
             <button onClick={handleLogout} className="text-white border rounded px-4 h-7 w-36">
               Déconnexion
             </button> </>
-           : <Link to="/login" onClick={handleToTop}>Login</Link>
+           : <Link to="/login">Login</Link>
           }
         </div>
       </div>

@@ -2,7 +2,7 @@ const Contact = () => {
     return (
         <>
             {/* Phrase entête */}
-            <div className="text-base text-title-color flex flex-col md:flex-row mx-20 md:mx-0 md:items-baseline space-y-10 md:space-y-6 md:space-x-4 md:justify-center md:text-lg  mt-28">
+            <div className="text-base text-title-color mt-10 md:mt-28 flex flex-col md:flex-row mx-20 md:mx-0 md:items-baseline space-y-10 md:space-y-6 md:space-x-4 md:justify-center md:text-lg">
                 <div className="flex flex-row">
                     Tu as une question
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 ml-1.5 text-indigo-400 transition-transform duration-300 ease-in-out hover:-translate-y-2">

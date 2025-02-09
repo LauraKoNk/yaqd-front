@@ -110,7 +110,7 @@ const ShowAll = ({ theme, handleToTop }) => {
     return (
         <main className="mx-10">
             {/* Phrase YAQD */}
-            <div className="font-spicyRice text-5xl md:text-6xl text-center mt-28 space-y-2 lg:flex justify-center items-baseline">
+            <div className="font-spicyRice text-5xl md:text-6xl text-center mt-10 md:mt-28 space-y-2 lg:flex justify-center items-baseline">
                 {theme === 'dark' ?
                     (<div className="text-white md:pr-2">Y'avait quoi déjà
                         {selectedChaine ? <span> {" "} sur</span> : ""}
