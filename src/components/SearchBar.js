@@ -6,7 +6,7 @@ const SearchBar = ({ goSearch, chaine, genre, type }) => {
     const [showPopover, setShowPopover] = useState(false);
 
     return (
-        <form className="flex"
+        <form className="flex lg:col-span-2"
             onSubmit={event => {
                 event.preventDefault();
                 goSearch(input);

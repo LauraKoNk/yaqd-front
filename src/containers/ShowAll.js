@@ -168,9 +168,9 @@ const ShowAll = ({ theme, handleToTop }) => {
 
             {/* Menus déroulants + barre de recherche */}
             <div className="container mt-16">
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
                     {/* Menu déroulant des chaines */}
-                    <div className="relative">
+                    <div className="relative lg:col-span-1">
                         <button
                             className="w-full bg-general-bg text-filters-title py-2 px-4 rounded border border-general-border focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
                             type="button"
@@ -212,7 +212,7 @@ const ShowAll = ({ theme, handleToTop }) => {
                         </div>
                     </div>
                     {/* Menu déroulant des genre */}
-                    <div className="relative">
+                    <div className="relative lg:col-span-1">
                         <button
                             className="w-full bg-general-bg text-filters-title py-2 px-4 rounded border border-general-border focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
                             type="button"
@@ -282,7 +282,7 @@ const ShowAll = ({ theme, handleToTop }) => {
                         </div>
                     </div>
                     {/* Menu déroulant des types */}
-                    <div className="relative">
+                    <div className="relative lg:col-span-1">
                         <button
                             className="w-full bg-general-bg text-filters-title py-2 px-4 rounded border border-general-border focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
                             type="button"
