@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const SearchBar = ({ goSearch, chaine, genre }) => {
+const SearchBar = ({ goSearch, chaine, genre, type }) => {
 
     const [input, setInput] = useState("");
     const [showPopover, setShowPopover] = useState(false);
@@ -23,7 +23,7 @@ const SearchBar = ({ goSearch, chaine, genre }) => {
                 onClick={() => setShowPopover(true)}
                 onBlur={() => setShowPopover(false)}
             />
-            {(chaine || genre) && showPopover && <div className="absolute mt-14 z-10 inline-block w-64 text-sm font-medium bg-general-bg border border-form-border text-title-color transition-opacity duration-300 rounded-lg shadow-sm">
+            {(chaine || genre || type) && showPopover && <div className="absolute mt-14 z-10 inline-block w-64 text-sm font-medium bg-general-bg border border-form-border text-title-color transition-opacity duration-300 rounded-lg shadow-sm">
                 <div className="relative">
                     {/* Flèche du popover */}
                     <div className="absolute -top-2 left-1/4 transform -translate-x-1/2 w-3.5 h-3.5 bg-general-bg border-l border-t border-form-border rotate-45"></div>

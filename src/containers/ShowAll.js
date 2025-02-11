@@ -10,8 +10,10 @@ const ShowAll = ({ theme, handleToTop }) => {
     const [chaines, setChaines] = useState([]);
     const [selectedChaine, setSelectedChaine] = useState(null);
     const [selectedGenre, setSelectedGenre] = useState(null);
+    const [selectedType, setSelectedType] = useState(null);
     const [isChainesOpen, setIsChainesOpen] = useState(false);
     const [isGenresOpen, setIsGenresOpen] = useState(false);
+    const [isTypesOpen, setIsTypesOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true);
 
@@ -55,12 +57,20 @@ const ShowAll = ({ theme, handleToTop }) => {
         setIsGenresOpen(!isGenresOpen);
     };
 
+    const toggleDropdownTypes = () => {
+        setIsTypesOpen(!isTypesOpen);
+    };
+
     const handleClickedChannel = (clickedChannel) => {
         setSelectedChaine(clickedChannel.nom);
     };
 
     const handleClickedGenre = (genre) => {
         setSelectedGenre(genre);
+    };
+
+    const handleClickedType = (format) => {
+        setSelectedType(format);
     };
 
     const handleSearch = (term) => {
@@ -70,17 +80,28 @@ const ShowAll = ({ theme, handleToTop }) => {
     const resetFilters = () => {
         setSelectedChaine(null);
         setSelectedGenre(null);
+        setSelectedType(null);
         setSearchTerm("");
     }
 
 
     const filteredAndSearchedDiffusions = diffusions.filter((diffusion) => {
-        if (selectedChaine && selectedGenre) {
+        if (selectedChaine && selectedGenre && selectedType) {
+            return diffusion.chaines.includes(selectedChaine) && diffusion.genre.includes(selectedGenre) && diffusion.format.includes(selectedType);
+        } else if (selectedChaine && selectedGenre) {
             return diffusion.chaines.includes(selectedChaine) && diffusion.genre.includes(selectedGenre);
+        } else if (selectedChaine && selectedType) {
+            return diffusion.chaines.includes(selectedChaine) && diffusion.format.includes(selectedType);
+        } else if (selectedGenre && selectedType) {
+            return diffusion.genre.includes(selectedGenre) && diffusion.format.includes(selectedType);
         } else if (selectedChaine) {
             return diffusion.chaines.includes(selectedChaine);
         } else if (selectedGenre) {
             return diffusion.genre.includes(selectedGenre);
+        }
+        else if (selectedType) {
+            console.log(selectedType);
+            return diffusion.format.includes(selectedType);
         }
         else if (searchTerm) {
             return diffusion.titre.toLowerCase().includes(searchTerm.toLowerCase());
@@ -147,9 +168,9 @@ const ShowAll = ({ theme, handleToTop }) => {
 
             {/* Menus déroulants + barre de recherche */}
             <div className="container mt-16">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                    {/* Menu déroulant des chaines */}
                     <div className="relative">
-                        {/* Menu déroulant des chaines */}
                         <button
                             className="w-full bg-general-bg text-filters-title py-2 px-4 rounded border border-general-border focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
                             type="button"
@@ -216,10 +237,10 @@ const ShowAll = ({ theme, handleToTop }) => {
                             </svg>
                         </button>
                         <div className={`absolute w-full mt-1 rounded bg-general-bg border border-filters-border 
-    text-filters-selected-title shadow-lg dropdown-menu z-10
-    transition-all duration-300 ease-in-out
-    ${isGenresOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}
-  `}>
+                                text-filters-selected-title shadow-lg dropdown-menu z-10
+                                transition-all duration-300 ease-in-out
+                                ${isGenresOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}
+                            `}>
                             <ul>
                                 <li
                                     className="py-2 px-4 hover:bg-general-hover cursor-pointer"
@@ -260,14 +281,54 @@ const ShowAll = ({ theme, handleToTop }) => {
                             </ul>
                         </div>
                     </div>
+                    {/* Menu déroulant des types */}
+                    <div className="relative">
+                        <button
+                            className="w-full bg-general-bg text-filters-title py-2 px-4 rounded border border-general-border focus:outline-none focus:shadow-outline flex items-center justify-between dropdown-button"
+                            type="button"
+                            onClick={toggleDropdownTypes}
+                        >
+                            Types
+                            <svg
+                                className={`w-4 h-4 ml-2 transform transition-transform ${isTypesOpen ? "rotate-180" : "rotate-0"
+                                    }`}
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M19 9l-7 7-7-7"
+                                />
+                            </svg>
+                        </button>
+                        <div className={`absolute w-full mt-1 rounded bg-general-bg border border-filters-border 
+                            text-filters-selected-title shadow-lg dropdown-menu z-10
+                            transition-all duration-300 ease-in-out
+                            ${isTypesOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}
+                            `}>
+                            <ul>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedType("Série animée"); setIsTypesOpen(false); handleToTop() }}>Série animée</li>
+                                <li
+                                    className="py-2 px-4 hover:bg-general-hover cursor-pointer"
+                                    onClick={() => { handleClickedType("Série live-action"); setIsTypesOpen(false); handleToTop() }}>Série live-action</li>
+                            </ul>
+                        </div>
+                    </div>
                     <SearchBar
-                        goSearch={handleSearch} chaine={selectedChaine} genre={selectedGenre}
+                        goSearch={handleSearch} chaine={selectedChaine} genre={selectedGenre} type={selectedType}
                     />
                 </div>
             </div>
             {/* Filtres affichés */}
             <div className="mt-10 md:px-8">
-                {(selectedChaine || selectedGenre || searchTerm) && (
+                {(selectedChaine || selectedGenre || selectedType || searchTerm) && (
                     <div className="flex justify-between items-baseline w-full font-medium text-sm md:text-lg">
                         <div className="flex items-center gap-2">
                             <svg className="text-filters-title" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px" fill="currentColor">
@@ -302,6 +363,29 @@ const ShowAll = ({ theme, handleToTop }) => {
                         <div className={`flex justify-between px-3 py-1 rounded-full gap-2 max-w-xs ${genreClass}`}>
                             <span className="font-wallop-medium truncate">{selectedGenre}</span>
                             <button onClick={() => setSelectedGenre(null)}>
+                                <svg className="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    )}
+                    {selectedType && (
+                        <div className="flex justify-between px-3 py-1 bg-general-bg rounded-full border gap-2 max-w-xs text-filters-selected-title">
+                            {selectedType === "Série live-action" ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" stroke-width="1.75"> <path d="M13.192 9h6.616a2 2 0 0 1 1.992 2.183l-.567 6.182a4 4 0 0 1 -3.983 3.635h-1.5a4 4 0 0 1 -3.983 -3.635l-.567 -6.182a2 2 0 0 1 1.992 -2.183z"></path> <path d="M15 13h.01"></path> <path d="M18 13h.01"></path> <path d="M15 16.5c1 .667 2 .667 3 0"></path> <path d="M8.632 15.982a4.037 4.037 0 0 1 -.382 .018h-1.5a4 4 0 0 1 -3.983 -3.635l-.567 -6.182a2 2 0 0 1 1.992 -2.183h6.616a2 2 0 0 1 2 2"></path> <path d="M6 8h.01"></path> <path d="M9 8h.01"></path> <path d="M6 12c.764 -.51 1.528 -.63 2.291 -.36"></path> </svg> 
+                            : 
+                            selectedType === "Série animée" ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" stroke-width="1.75">
+                                <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
+                                <path d="M13.5 6.5l4 4"></path>
+                            </svg>
+                                : ""}
+                            <span className="font-wallop-medium truncate">{selectedType}</span>
+                            <button onClick={() => setSelectedType(null)}>
                                 <svg className="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                     <path
                                         stroke="currentColor"
